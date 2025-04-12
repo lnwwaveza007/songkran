@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retro Songkran Card</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap");
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #ffb6c1;
+        font-family: "VT323", monospace;
+        overflow: hidden;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: repeating-linear-gradient(
+          45deg,
+          #ffb6c1,
+          #ffb6c1 10px,
+          #ffcfda 10px,
+          #ffcfda 20px
+        );
+      }
+
+      .card {
+        width: 90%;
+        max-width: 450px;
+        height: auto;
+        min-height: 550px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.3);
+        position: relative;
+        padding: 20px;
+        text-align: center;
+        border: 3px solid #333;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.05) 2px,
+          rgba(0, 0, 0, 0.05) 4px
+        );
+        pointer-events: none;
+      }
+
+      h1 {
+        font-family: "Press Start 2P", cursive;
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: #ff6b9d;
+        text-shadow: 2px 2px 0 #333;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 375px) {
+        h1 {
+          font-size: 18px;
+        }
+      }
+
+      .friend-name {
+        font-family: "Press Start 2P", cursive;
+        font-size: 16px;
+        margin: 10px 0;
+        color: #333;
+        text-shadow: 1px 1px 0 #ff6b9d;
+      }
+
+      .pixel-art {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 160px;
+        height: 160px;
+        margin: 15px auto;
+        image-rendering: pixelated;
+        position: relative;
+      }
+
+      .water {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #4fbfff;
+        border-radius: 50%;
+        animation: water 1.5s infinite;
+        z-index: 5;
+      }
+
+      .water1 {
+        top: 100px;
+        left: 10px;
+        animation-delay: 0.2s;
+      }
+
+      .water2 {
+        top: 80px;
+        left: 130px;
+        animation-delay: 0.5s;
+      }
+
+      .water3 {
+        top: 110px;
+        left: 80px;
+        animation-delay: 0.8s;
+      }
+
+      @keyframes water {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(80px) scale(0.5);
+          opacity: 0;
+        }
+      }
+
+      .message {
+        font-size: 22px;
+        line-height: 1.4;
+        margin: 15px 0;
+      }
+
+      @media (max-width: 375px) {
+        .message {
+          font-size: 18px;
+        }
+      }
+
+      .btn {
+        font-family: "Press Start 2P", cursive;
+        background-color: #ffcc00;
+        border: 3px solid #333;
+        box-shadow: 4px 4px 0 #333;
+        padding: 8px 16px;
+        color: #333;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 5px;
+        position: relative;
+        z-index: 20;
+        transition: transform 0.2s, box-shadow 0.2s;
+        user-select: none;
+      }
+
+      @media (max-width: 375px) {
+        .btn {
+          font-size: 12px;
+          padding: 6px 12px;
+        }
+      }
+
+      .btn:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 #333;
+      }
+
+      .btn:active {
+        transform: translate(4px, 4px);
+        box-shadow: 0 0 0 #333;
+      }
+
+      .decorations {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      .dot {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ffcc00;
+        animation: float 3s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .custom-message {
+        display: none;
+        font-size: 24px;
+        margin-top: 15px;
+        color: #ff6b9d;
+        font-weight: bold;
+        text-shadow: 1px 1px 0 #333;
+      }
+
+      @media (max-width: 375px) {
+        .custom-message {
+          font-size: 20px;
+        }
+      }
+
+      .stars {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      .star {
+        position: absolute;
+        background-color: transparent;
+        width: 20px;
+        height: 20px;
+        clip-path: polygon(
+          50% 0%,
+          61% 35%,
+          98% 35%,
+          68% 57%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          32% 57%,
+          2% 35%,
+          39% 35%
+        );
+        animation: twinkle 1.5s infinite alternate;
+      }
+
+      @keyframes twinkle {
+        0% {
+          opacity: 0.2;
+          transform: scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .share-container {
+        margin-top: 15px;
+        font-size: 12px;
+        position: relative;
+        z-index: 15;
+      }
+
+      .link-input {
+        width: 100%;
+        padding: 5px;
+        border: 2px solid #333;
+        font-family: "VT323", monospace;
+        font-size: 14px;
+        margin-top: 5px;
+        text-align: center;
+      }
+
+      /* Cute animations */
+      .cute-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 30;
+        perspective: 1000px;
+        overflow: hidden;
+      }
+
+      /* Heart animations */
+      .heart {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: #ff6b9d;
+        transform: rotate(45deg);
+        animation: float-heart 3s forwards ease-out;
+        opacity: 0;
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        width: 30px;
+        height: 30px;
+        background-color: #ff6b9d;
+        border-radius: 50%;
+        position: absolute;
+      }
+
+      .heart::before {
+        top: -15px;
+        left: 0;
+      }
+
+      .heart::after {
+        top: 0;
+        left: -15px;
+      }
+
+      @keyframes float-heart {
+        0% {
+          transform: rotate(45deg) translateY(0) scale(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: rotate(45deg) translateY(-100px) scale(1);
+          opacity: 0;
+        }
+      }
+
+      /* Rainbow animation */
+      .rainbow {
+        position: absolute;
+        width: 120px;
+        height: 60px;
+        border-radius: 60px 60px 0 0;
+        opacity: 0;
+        overflow: hidden;
+        animation: rainbow-appear 3s forwards;
+      }
+
+      .rainbow-layer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 60px 60px 0 0;
+      }
+
+      .rainbow-layer:nth-child(1) {
+        background-color: #ff5252;
+        transform: scale(1);
+      }
+      .rainbow-layer:nth-child(2) {
+        background-color: #ffb142;
+        transform: scale(0.9);
+      }
+      .rainbow-layer:nth-child(3) {
+        background-color: #ffeb3b;
+        transform: scale(0.8);
+      }
+      .rainbow-layer:nth-child(4) {
+        background-color: #79d70f;
+        transform: scale(0.7);
+      }
+      .rainbow-layer:nth-child(5) {
+        background-color: #38b0de;
+        transform: scale(0.6);
+      }
+      .rainbow-layer:nth-child(6) {
+        background-color: #9d65c9;
+        transform: scale(0.5);
+      }
+      .rainbow-layer:nth-child(7) {
+        background-color: white;
+        transform: scale(0.4);
+      }
+
+      @keyframes rainbow-appear {
+        0% {
+          transform: translateY(100%) scale(0.5);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        100% {
+          transform: translateY(-30px) scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      /* Cute animal animation */
+      .cute-animal {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        opacity: 0;
+        animation: bounce-in 2s forwards;
+      }
+
+      @keyframes bounce-in {
+        0% {
+          transform: scale(0) translateY(50px);
+          opacity: 0;
+        }
+        40% {
+          transform: scale(1.2) translateY(-10px);
+          opacity: 1;
+        }
+        60% {
+          transform: scale(0.9) translateY(5px);
+          opacity: 1;
+        }
+        80% {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0) translateY(-50px);
+          opacity: 0;
+        }
+      }
+
+      /* Bubble animation */
+      .bubble {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 30% 30%,
+          rgba(255, 255, 255, 0.8) 10%,
+          rgba(173, 216, 230, 0.6) 70%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        animation: float-bubble 3s forwards;
+      }
+
+      @keyframes float-bubble {
+        0% {
+          transform: translateY(0) translateX(0) scale(0.2);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.8;
+        }
+        90% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-150px) translateX(var(--tx)) scale(1);
+          opacity: 0;
+        }
+      }
+
+      /* Confetti animation */
+      .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        opacity: 0;
+        transform-origin: center;
+        animation: confetti-fall 3s forwards;
+      }
+
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(-50px) rotate(0deg) scale(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(300px) rotate(720deg) scale(1);
+          opacity: 0;
+        }
+      }
+
+      /* Sun animation */
+      .sun {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        background-color: #ffcc00;
+        border-radius: 50%;
+        opacity: 0;
+        box-shadow: 0 0 40px #ffcc00;
+        animation: sun-rise 3s forwards;
+      }
+
+      .sun-ray {
+        position: absolute;
+        width: 20px;
+        height: 4px;
+        background-color: #ffcc00;
+        top: 38px;
+        left: 80px;
+        transform-origin: 0 0;
+      }
+
+      @keyframes sun-rise {
+        0% {
+          transform: translateY(100px) scale(0.2);
+          opacity: 0;
+        }
+        30% {
+          opacity: 1;
+        }
+        70% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        100% {
+          transform: translateY(-100px) scale(1.5);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" id="card">
+      <div class="stars"></div>
+      <h1>HAPPY SONGKRAN!</h1>
+      <p style="margin-top: 20px;" class="friend-name">Sawasdee 🙏</p>
+      <p class="friend-name">PHEE MAI THAI KUB,</p>
+      <div id="friendNameDisplay" class="friend-name"></div>
+      <div class="pixel-art">
+        <img src="./watergun.png" style="
+        width: 200px;
+        height: 160px;
+        border: 3px solid #076aff;
+        "/>
+        <div class="water water1"></div>
+        <div class="water water2"></div>
+        <div class="water water3"></div>
+      </div>
+      <div class="message" id="customQuote">
+        Wishing you a splash-tastic Songkran! May this Thai New Year bring you
+        joy, luck, and lots of water fights!
+      </div>
+      <div class="custom-message" id="customMessage"></div>
+      <button style="margin-top: 30px;" class="btn" id="messageBtn" onclick="showCuteAnimation()">
+        CLICK ME !!
+        <p style="font-size: 8px">(MUCH AS YOU WANT)</p>
+      </button>
+      <div class="decorations"></div>
+      <div class="cute-container" id="cuteContainer"></div>
+      <audio id="songkranSong" src="./songkran.mp3" loop></audio>
+    </div>
+
+    <script>
+      // Parse URL parameters
+      function getUrlParams() {
+        const params = {};
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        params.name = urlParams.get("name") || "";
+        params.quote = urlParams.get("quote") || "";
+
+        return params;
+      }
+
+      // Set content from URL parameters
+      function setContentFromParams() {
+        const params = getUrlParams();
+        const friendNameDisplay = document.getElementById("friendNameDisplay");
+        const customQuote = document.getElementById("customQuote");
+
+        if (params.name) {
+          document.title = `Songkran Card for ${params.name}`;
+          friendNameDisplay.textContent = `${params.name}!`;
+        } else {
+          friendNameDisplay.style.display = "none";
+        }
+
+        if (params.quote) {
+          customQuote.textContent = decodeURIComponent(params.quote);
+        }
+
+        // Update share link
+        updateShareLink();
+      }
+
+      // Update the share link with current URL
+      function updateShareLink() {
+        const shareLink = document.getElementById("shareLink");
+        const baseUrl = window.location.href.split("?")[0];
+        shareLink.textContent =
+          baseUrl + "?name=FriendName&quote=Your%20custom%20message%20here";
+
+        // Make it selectable
+        shareLink.addEventListener("click", function () {
+          this.focus();
+          document.execCommand("selectAll");
+        });
+      }
+
+      // Create dots
+      const decorations = document.querySelector(".decorations");
+      for (let i = 0; i < 20; i++) {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        dot.style.left = Math.random() * 100 + "%";
+        dot.style.top = Math.random() * 100 + "%";
+        dot.style.backgroundColor = [
+          "#ffcc00",
+          "#ff6b9d",
+          "#80caff",
+          "#9dff80",
+        ][Math.floor(Math.random() * 4)];
+        dot.style.animationDelay = Math.random() * 3 + "s";
+        decorations.appendChild(dot);
+      }
+
+      // Create stars
+      const stars = document.querySelector(".stars");
+      for (let i = 0; i < 12; i++) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.style.left = Math.random() * 100 + "%";
+        star.style.top = Math.random() * 100 + "%";
+        star.style.backgroundColor = ["#ffcc00", "#ff6b9d", "#80caff"][
+          Math.floor(Math.random() * 3)
+        ];
+        star.style.animationDelay = Math.random() * 1.5 + "s";
+        stars.appendChild(star);
+      }
+
+      const customMessage = document.getElementById("customMessage");
+      const messageBtn = document.getElementById("messageBtn");
+      const card = document.getElementById("card");
+      const cuteContainer = document.getElementById("cuteContainer");
+
+      const messages = [
+        "You're awesome! 🌟",
+        "Miss you! 💌",
+        "Let's celebrate! 🎉",
+        "Stay cool! 😎",
+        "You rock! 🤘",
+        "You make my day brighter! ☀️",
+        "Sending you a big bear hug! 🐻",
+        "You’re my sunshine on a cloudy day! 🌤️",
+        "Keep being amazing! 💪",
+        "You’ve got this! 🚀",
+        "Thinking of you with sparkles! ✨",
+        "Your smile is contagious! 😄",
+        "Let’s make today magical! 🪄",
+        "I’m so lucky to know you! 🍀",
+        "Stay pawsitive! 🐾",
+        "You light up the room! 💡",
+        "Everything’s better with you! 💞",
+        "Shine on, superstar! 🌠",
+        "Just a reminder: you're loved! 💖",
+        "Can’t wait to see your smile! 😁",
+        "You're sweeter than cupcakes! 🧁",
+        "Dream big, cutie! 🌈",
+      ];
+
+      // Create heart animation
+      function createHearts() {
+        for (let i = 0; i < 8; i++) {
+          const heart = document.createElement("div");
+          heart.classList.add("heart");
+          heart.style.left = 40 + Math.random() * 260 + "px";
+          heart.style.top = 180 + Math.random() * 100 + "px";
+          heart.style.animationDelay = Math.random() * 0.5 + "s";
+          heart.style.transform = `rotate(45deg) scale(${
+            0.5 + Math.random() * 0.5
+          })`;
+          cuteContainer.appendChild(heart);
+
+          // Remove after animation
+          setTimeout(() => {
+            heart.remove();
+          }, 3000);
+        }
+      }
+
+      // Create rainbow animation
+      function createRainbow() {
+        const rainbow = document.createElement("div");
+        rainbow.classList.add("rainbow");
+        rainbow.style.left = "170px";
+        rainbow.style.bottom = "20px";
+
+        // Create rainbow layers
+        for (let i = 0; i < 7; i++) {
+          const layer = document.createElement("div");
+          layer.classList.add("rainbow-layer");
+          rainbow.appendChild(layer);
+        }
+
+        cuteContainer.appendChild(rainbow);
+
+        // Remove after animation
+        setTimeout(() => {
+          rainbow.remove();
+        }, 3000);
+      }
+
+      // Create cute animal animation (using emojis)
+      function createCuteAnimal() {
+        const animals = ["🐶", "🐱", "🐰", "🦄", "🐢", "🐬", "🐼", "🦊"];
+        const animal = document.createElement("div");
+        animal.classList.add("cute-animal");
+        animal.textContent =
+          animals[Math.floor(Math.random() * animals.length)];
+        animal.style.fontSize = "50px";
+        animal.style.left = 180 + "px";
+        animal.style.top = 210 + "px";
+
+        cuteContainer.appendChild(animal);
+
+        // Remove after animation
+        setTimeout(() => {
+          animal.remove();
+        }, 2000);
+      }
+
+      // Create bubbles animation
+      function createBubbles() {
+        for (let i = 0; i < 15; i++) {
+          const bubble = document.createElement("div");
+          bubble.classList.add("bubble");
+          bubble.style.left = 120 + Math.random() * 180 + "px";
+          bubble.style.bottom = "80px";
+          bubble.style.width = 10 + Math.random() * 20 + "px";
+          bubble.style.height = bubble.style.width;
+          bubble.style.animationDelay = Math.random() * 0.5 + "s";
+          bubble.style.setProperty("--tx", Math.random() * 100 - 50 + "px");
+
+          cuteContainer.appendChild(bubble);
+
+          // Remove after animation
+          setTimeout(() => {
+            bubble.remove();
+          }, 3000);
+        }
+      }
+
+      // Create confetti animation
+      function createConfetti() {
+        const colors = [
+          "#ff6b9d",
+          "#ffcc00",
+          "#80caff",
+          "#9dff80",
+          "#ff9f80",
+          "#d580ff",
+        ];
+
+        for (let i = 0; i < 30; i++) {
+          const confetti = document.createElement("div");
+          confetti.classList.add("confetti");
+          confetti.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = Math.random() * 500 + "px";
+          confetti.style.top = -20 + "px";
+          confetti.style.width = 5 + Math.random() * 10 + "px";
+          confetti.style.height = 5 + Math.random() * 10 + "px";
+          confetti.style.animationDelay = Math.random() * 0.5 + "s";
+          confetti.style.opacity = 0;
+
+          cuteContainer.appendChild(confetti);
+
+          // Remove after animation
+          setTimeout(() => {
+            confetti.remove();
+          }, 3000);
+        }
+      }
+
+      // Create sun animation
+      function createSun() {
+        const sun = document.createElement("div");
+        sun.classList.add("sun");
+        sun.style.left = "130px";
+        sun.style.bottom = "100px";
+
+        // Create sun rays
+        for (let i = 0; i < 12; i++) {
+          const ray = document.createElement("div");
+          ray.classList.add("sun-ray");
+          ray.style.transform = `rotate(${i * 30}deg)`;
+          sun.appendChild(ray);
+        }
+
+        cuteContainer.appendChild(sun);
+
+        // Remove after animation
+        setTimeout(() => {
+          sun.remove();
+        }, 3000);
+      }
+
+      let playing = false;
+
+      // Main function to show cute animations (called when button is clicked)
+      function showCuteAnimation() {
+        const song = document.getElementById("songkranSong");
+        if (!playing) {
+          song.play();
+          playing = true;
+        }
+        // Display random message
+        const randomMessage =
+          messages[Math.floor(Math.random() * messages.length)];
+        customMessage.textContent = randomMessage;
+        customMessage.style.display = "block";
+
+        // Create multiple water drops
+        for (let i = 0; i < 8; i++) {
+          const water = document.createElement("div");
+          water.classList.add("water");
+          water.style.left = Math.random() * 160 + "px";
+          water.style.top = Math.random() * 50 + 80 + "px";
+          water.style.animationDelay = Math.random() * 0.5 + "s";
+          document.querySelector(".pixel-art").appendChild(water);
+
+          // Remove after animation completes
+          setTimeout(() => {
+            water.remove();
+          }, 1500);
+        }
+
+        // Select and play a random cute animation
+        const randomAnimation = Math.floor(Math.random() * 5);
+        switch (randomAnimation) {
+          case 0:
+            createHearts();
+            break;
+          case 1:
+            createRainbow();
+            break;
+          case 2:
+            createCuteAnimal();
+            break;
+          case 3:
+            createBubbles();
+            break;
+          case 4:
+            createConfetti();
+            break;
+          default:
+            createSun();
+        }
+      }
+
+      // Add direct click handler on the button
+      document.getElementById("messageBtn").onclick = showCuteAnimation;
+
+      // Initialize content from URL parameters
+      window.onload = function () {
+        setContentFromParams();
+
+        // Make sure button is properly attached
+        document
+          .getElementById("messageBtn")
+          .addEventListener("click", showCuteAnimation);
+      };
+    </script>
+  </body>
+</html>
